@@ -10,6 +10,7 @@ router.get("/", (req, res) => {
       var books = [];
       if (response.total > 0) {
         books = formatBooks_(response.items);
+        // books = stringify(response.items);
       }
       res.send(books);
     })
@@ -32,28 +33,31 @@ router.get("/:id", (req, res) => {
       console.log("id -", req.params.id, entry, typeof entry);
       res.send(stringify(entry));
     })
-    // .then((entry) => {
-    //   res.send(
-    //     entry
-    //   );
-    // })
     .catch((err) => console.log(err));
 });
 
 function formatBooks_(books) {
   const result = [];
   books.forEach((element) => {
-    result.push({
-      title: element.sys.title,
-      author: {
-        id: element.sys.id,
-        firstName: element.fields.author.fields.firstName,
-        lastName: element.fields.author.fields.lastName,
-      },
-    });
+    // result.push(stringify(element));
+    // console.log("element.fields.photo", element.fields.photo);
+    result.push(formatBook_(element));
   });
-
   return result;
+}
+
+function formatBook_(book) {
+  return {
+    sys: { id: book.sys.id },
+    title: book.fields.title,
+    author: {
+      id: book.sys.id,
+      firstName: book.fields.author.fields.firstName,
+      lastName: book.fields.author.fields.lastName,
+    },
+    photo: { url: book.fields.photo.fields.file.url },
+    genre: book.fields.genre,
+  };
 }
 
 module.exports = router;
