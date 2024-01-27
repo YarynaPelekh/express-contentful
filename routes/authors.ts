@@ -1,14 +1,14 @@
-const express = require("express");
+import express, { Request, Response } from "express";
+import { InputAuthorType, OutputAuthorType } from "../types";
+
 const cf = require("../services/cf");
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  console.log("authors router");
   cf.api
     .getEntries({ content_type: "persona", limit: 4 })
-    .then((response) => {
-      //   console.log(response.items, "response.total ", response.total);
-      var authors = [];
+    .then((response: { total: number; items: InputAuthorType[] }) => {
+      let authors: OutputAuthorType[] = [];
       if (response.total > 0) {
         authors = formatAuthors_(response.items);
       }
@@ -20,31 +20,27 @@ router.get("/", (req, res) => {
 router.get("/author", (req, res) => {
   cf.api
     .getEntry("1k4vJ3mdEBnBx5U6JDpIFb")
-    .then((entry) => {
-      console.log(entry, typeof entry);
+    .then((entry: InputAuthorType) => {
       return entry;
     })
-    .then((entry) => {
+    .then((entry: InputAuthorType) => {
       res.send(entry);
     })
-    .catch((err) => console.log(err));
+    .catch((err: Error) => console.log(err));
 });
 
 router.get("/:id", (req, res) => {
   cf.api
     .getEntry(req.params.id)
-    .then((entry) => {
-      console.log(entry, typeof entry);
+    .then((entry: InputAuthorType) => {
       res.send(entry);
     })
-    .catch((err) => console.log(err));
+    .catch((err: Error) => console.log(err));
 });
 
-function formatAuthors_(authors) {
-  //   console.log("Books books", books);
-  const result = [];
-  console.log("Authors array -", authors);
-  authors.forEach((element) => {
+function formatAuthors_(authors: InputAuthorType[]) {
+  const result: OutputAuthorType[] = [];
+  authors.forEach((element: InputAuthorType) => {
     result.push({
       id: element.sys.id,
       firstName: element.fields.firstName,

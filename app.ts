@@ -14,9 +14,7 @@ app.use(cors());
 
 app.get("/", (req: Request, res: Response) => {
   console.log("Get request  (with TS)");
-  res.send(
-    "Get request (with TS)aaaaaa sdfgb sfdgbsfgnkn ;kjnljhbdfv adflkvjn"
-  );
+  res.send("Get request (with TS)");
 });
 
 const booksRouter = require("./routes/books");
