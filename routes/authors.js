@@ -25,7 +25,6 @@ router.get("/author", (req, res) => {
       return entry;
     })
     .then((entry) => {
-      // res.send(`${entry.fields.firstName} ${entry.fields.lastName}`);
       res.send(entry);
     })
     .catch((err) => console.log(err));
@@ -37,11 +36,7 @@ router.get("/:id", (req, res) => {
     .then((entry) => {
       console.log(entry, typeof entry);
       res.send(entry);
-      // return entry;
     })
-    // .then((entry) => {
-    //   res.send(`${entry.fields.firstName} ${entry.fields.lastName}`);
-    // })
     .catch((err) => console.log(err));
 });
 
