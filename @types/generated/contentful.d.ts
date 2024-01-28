@@ -8,7 +8,7 @@ export interface IBookFields {
   title?: string | undefined;
 
   /** Author */
-  author?: Entry<{ [fieldId: string]: unknown }> | undefined;
+  author?: IPersona;
 
   /** Description */
   description?: Document | undefined;
@@ -97,6 +97,7 @@ export interface IPersona extends Entry<IPersonaFields> {
       };
     };
   };
+  fields: IPersonaFields;
 }
 
 export interface ISettingsFields {

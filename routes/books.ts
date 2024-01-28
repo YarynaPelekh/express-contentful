@@ -9,10 +9,9 @@ router.get("/", (req: Request, res: Response) => {
   cf.api
     .getEntries({ content_type: "book" })
     .then((response: { total: number; items: InputBookType[] }) => {
-      var books: OutputBookType[] = [];
+      let books: OutputBookType[] = [];
       if (response.total > 0) {
         books = formatBooks_(response.items);
-        // books = stringify(response.items);
       }
       res.send(books);
     })
@@ -41,8 +40,6 @@ router.get("/:id", (req, res) => {
 function formatBooks_(books: InputBookType[]) {
   const result: OutputBookType[] = [];
   books.forEach((element) => {
-    // result.push(stringify(element));
-    // console.log("element.fields.photo", element.fields.photo);
     result.push(formatBook_(element));
   });
   return result;
@@ -54,10 +51,12 @@ function formatBook_(book: InputBookType): OutputBookType {
     title: book.fields.title,
     author: {
       id: book.sys.id,
-      firstName: book.fields.author.fields.firstName,
-      lastName: book.fields.author.fields.lastName,
+      firstName: book.fields.author && book.fields.author.fields.firstName,
+      lastName: book.fields.author && book.fields.author.fields.lastName,
     },
-    photo: { url: book.fields.photo.fields.file.url },
+    photo: {
+      url: book.fields.photo && (book.fields.photo.fields.file?.url as string),
+    },
     genre: book.fields.genre,
   };
 }
