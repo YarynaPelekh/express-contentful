@@ -24,3 +24,6 @@ app.use("/books", booksRouter);
 app.use("/authors", authorsRouter);
 
 app.listen("3009");
+
+let dotenv = require("dotenv").config();
+console.log(dotenv);
