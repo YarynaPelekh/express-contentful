@@ -53,6 +53,7 @@ function formatBook_(book: InputBookType): OutputBookType {
       id: book.sys.id,
       firstName: book.fields.author && book.fields.author.fields.firstName,
       lastName: book.fields.author && book.fields.author.fields.lastName,
+      pseudonym: book.fields.author && book.fields.author.fields.pseudonym,
     },
     photo: {
       url: book.fields.photo && (book.fields.photo.fields.file?.url as string),

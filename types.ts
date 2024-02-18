@@ -8,11 +8,7 @@ export type InputBookType = {
 export type OutputBookType = {
   sys: { id: string };
   title?: string;
-  author: {
-    id: string;
-    firstName?: string;
-    lastName?: string;
-  };
+  author: OutputAuthorType;
   photo: { url?: string };
   genre?: string;
 };
@@ -21,6 +17,7 @@ export type OutputAuthorType = {
   id: string;
   firstName?: string;
   lastName?: string;
+  pseudonym?: string;
 };
 
 export type InputAuthorType = {

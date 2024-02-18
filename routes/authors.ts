@@ -45,6 +45,7 @@ function formatAuthors_(authors: InputAuthorType[]) {
       id: element.sys.id,
       firstName: element.fields.firstName,
       lastName: element.fields.lastName,
+      pseudonym: element.fields.pseudonym,
     });
   });
 

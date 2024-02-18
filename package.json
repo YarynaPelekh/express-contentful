@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "devStart": "nodemon server.js",
     "start": "nodemon app.ts",
-    "contentful-typescript-codegen": "contentful-typescript-codegen --output @types/generated/contentful.d.ts"
+    "contentful-typescript-codegen": "contentful-typescript-codegen --output @types/generated/contentful.d.ts",
+    "generate-types": "tsc -p tsconfig-export.json && cp ./dist/export-api-types.d.ts ../project/react-contentful-app/src/types"
   },
   "keywords": [],
   "author": "",

@@ -8,7 +8,8 @@ export interface IBookFields {
   title?: string | undefined;
 
   /** Author */
-  author?: IPersona;
+  // author?: Entry<{ [fieldId: string]: unknown }> | undefined;
+  author?: IPersona & { fields: IPersonaFields };
 
   /** Description */
   description?: Document | undefined;
@@ -24,9 +25,6 @@ export interface IBookFields {
 
   /** Genre */
   genre_ref?: IGenre | undefined;
-
-  /** RelatedBooks */
-  relatedBooks?: IBook[] | undefined;
 }
 
 export interface IBook extends Entry<IBookFields> {
@@ -80,6 +78,9 @@ export interface IPersonaFields {
 
   /** Photo */
   photo?: Asset | undefined;
+
+  /** Pseudonym */
+  pseudonym: string;
 }
 
 export interface IPersona extends Entry<IPersonaFields> {
@@ -97,7 +98,6 @@ export interface IPersona extends Entry<IPersonaFields> {
       };
     };
   };
-  fields: IPersonaFields;
 }
 
 export interface ISettingsFields {
